@@ -1,55 +1,61 @@
 # Chat Splitter (Decky Loader)
 
-Separa el audio del **chat** (Discord, Vesktop, etc.) del audio del **juego**:
+🇪🇸 [Leer en español](README.es.md)
 
-| Situación | Juego | Chat |
+A Decky Loader plugin for the Steam Deck that splits **chat** audio (Discord, Vesktop, etc.) from **game** audio, so each one plays on a different output.
+
+> ⚠️ **Disclaimer:** This is a personal project, built with the help of AI (Claude by Anthropic). It is provided as-is, with no warranty. If you decide to try it, **you do so at your own risk**.
+
+## What it does
+
+| Situation | Game | Chat |
 |---|---|---|
-| Conectada a TV, sin audífonos | TV | Bocinas de la Deck |
-| Conectada a TV, con audífonos (jack/Bluetooth/USB) | TV | Audífonos |
-| Portátil, con audífonos | Bocinas de la Deck | Audífonos |
-| Portátil, sin audífonos | Todo junto en las bocinas | |
+| Docked to TV, no headphones | TV | Steam Deck speakers |
+| Docked to TV, with headphones (jack/Bluetooth/USB) | TV | Headphones |
+| Handheld, with headphones | Steam Deck speakers | Headphones |
+| Handheld, no headphones | Everything together on the speakers | |
 
-Cambia solo al conectar/desconectar la TV o los audífonos. Si hay varios audífonos
-conectados, la prioridad es Bluetooth > USB > jack.
+It switches automatically when you plug or unplug the TV or headphones. If more than one pair of headphones is connected, the priority is Bluetooth > USB > jack.
 
-> En la Steam Deck **LCD**, las bocinas y el jack son el mismo dispositivo y no pueden
-> sonar a la vez; en modo portátil usa audífonos Bluetooth. En la OLED son
-> dispositivos separados, así que deberían poder sonar a la vez.
+> On the Steam Deck **LCD**, the speakers and the headphone jack are the same audio device and can't play at the same time, so handheld mode needs Bluetooth or USB headphones. On the OLED they are separate devices.
 
-## Instalar
+## Install
 
-1. En Modo Escritorio, copia `chat-splitter.zip` a la Deck.
-2. Modo Juego → menú de Decky (`...`) → engranaje ⚙️ → **Developer** → activa *Developer mode*.
-3. En **Developer** → *Install Plugin from ZIP File* → elige el zip.
-   (Alternativa: descomprímelo en `~/homebrew/plugins/` y reinicia Decky.)
+1. Download `chat-splitter.zip` from [Releases](https://github.com/Pollito001/chat-splitter/releases).
+2. In Game Mode, open Decky (`...`) → ⚙️ → **Developer** → turn on *Developer mode*.
+3. In **Developer**, choose *Install Plugin from ZIP File* and pick the zip.
+   (Alternative: unzip it into `~/homebrew/plugins/` and restart Decky.)
 
-## Uso
+## Usage
 
-Abre el panel **Chat Splitter** en el menú de acceso rápido:
+Open the **Chat Splitter** panel in the Quick Access menu:
 
-- **Separar chat y juego**: activa/desactiva todo el plugin.
-- **Separar también sin TV**: activa el modo portátil (juego en bocinas, chat en audífonos).
-- **Fijar la salida del juego**: SteamOS suele mudar todo el audio a los audífonos
-  cuando los conectas; esto lo regresa a la TV o a las bocinas.
-- **Volumen**: sliders separados para juego y chat.
-- **Apps sonando ahora**: lista todo lo que está reproduciendo audio. Activa el
-  toggle de cualquier app para tratarla como chat (por ejemplo, el chat de voz de
-  Steam o un navegador). Se guarda como regla.
-- **Reglas de chat**: palabras clave que identifican apps de chat. Por defecto:
-  discord, vesktop, webcord, armcord, legcord.
+- **Split chat and game** (*Separar chat y juego*): turns the whole plugin on or off.
+- **Split without TV too** (*Separar también sin TV*): enables handheld mode (game on speakers, chat on headphones).
+- **Lock game output** (*Fijar la salida del juego*): SteamOS usually moves all audio to headphones when you plug them in; this keeps the game on the TV or speakers.
+- **Volume**: separate sliders for game and chat.
+- **Apps playing now**: lists everything that is playing audio. Toggle any app to treat it as chat (for example, Steam voice chat or a browser). It is saved as a rule.
+- **Chat rules**: keywords that identify chat apps. Defaults: discord, vesktop, webcord, armcord, legcord.
 
-## Notas técnicas
+The panel itself is in Spanish; the labels above include the Spanish text you'll see.
 
-- Usa `pactl` (pipewire-pulse) como el usuario `deck`; no necesita root.
-- Reacciona a eventos con `pactl subscribe` y revisa cada 5 s como respaldo.
-- Al desactivar o desinstalar, los streams movidos vuelven a la salida por defecto.
-- El chat de voz de Steam corre dentro del cliente de Steam. Si quieres separarlo,
-  actívalo desde *Apps sonando ahora* mientras hablas; ojo que eso también moverá
-  los sonidos de la interfaz de Steam a la Deck.
+## Technical notes
 
-## Compilar
+- Uses `pactl` (pipewire-pulse) as the `deck` user; it doesn't need root.
+- Reacts to audio events with `pactl subscribe`, with a 5-second check as a fallback.
+- When disabled or uninstalled, it hands output selection back to SteamOS and resets volumes to 100%.
+- Steam voice chat runs inside the Steam client. If you mark it as chat, Steam's interface sounds will also go to the chat output.
+- Tested on a Steam Deck OLED. Other SteamOS handhelds (e.g. Legion Go S) use different audio hardware and probably need adjustments.
+
+## Build from source
 
 ```bash
 npm install
 npm run build
 ```
+
+Then package `dist/index.js`, `main.py`, `plugin.json`, `package.json` and `README.md` inside a `Chat Splitter/` folder and zip it.
+
+## License
+
+BSD-3-Clause
