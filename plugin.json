@@ -1,0 +1,11 @@
+{
+  "name": "Chat Splitter",
+  "author": "Joan",
+  "flags": [],
+  "api_version": 1,
+  "publish": {
+    "tags": ["audio", "discord", "chat", "docked"],
+    "description": "Manda el audio del chat a los audífonos o bocinas de la Steam Deck mientras el juego suena en la TV.",
+    "image": ""
+  }
+}
