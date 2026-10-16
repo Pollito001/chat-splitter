@@ -1,8 +1,10 @@
 # Chat Splitter (Decky Loader)
 
-🇪🇸 [Leer en español](README.es.md)
+[Leer en español](README.es.md)
 
-A Decky Loader plugin for the Steam Deck that splits **chat** audio (Discord, Vesktop, etc.) from **game** audio, so each one plays on a different output.
+A Decky Loader plugin for the Steam Deck that splits **voice chat** audio (**Steam chat**, Discord, Vesktop, etc.) from **game** audio, so each one plays on a different output.
+
+**Steam voice chat:** Steam chat runs inside the Steam client, so it isn't detected automatically. During a call, open the panel and, under *Apps sonando ahora* (Apps playing now), turn on the toggle for **Steam**. It's saved, so you only do it once. Discord and similar apps are detected automatically.
 
 > ⚠️ **Disclaimer:** This is a personal project, built with the help of AI (Claude by Anthropic). It is provided as-is, with no warranty. If you decide to try it, **you do so at your own risk**.
 
